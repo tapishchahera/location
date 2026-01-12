@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Location Demo</title>
+</head>
+<body>
+  <h2>Location Permission Demo</h2>
+  <p>Click the button and allow location access.</p>
+  <button onclick="getLocation()">Get Location</button>
+
+  <p id="output"></p>
+
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        document.getElementById("output").innerHTML =
+          "Geolocation not supported.";
+      }
+    }
+
+    function showPosition(position) {
+      document.getElementById("output").innerHTML =
+        "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude;
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Location Demo</title>
+</head>
+<body>
+  <h2>GPS Location Demo</h2>
+  <p>This page will request your location for educational purposes.</p>
+  <button onclick="getLocation()">Allow & Get Location</button>
+
+  <p id="output"></p>
+
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          showPosition,
+          showError
+        );
+      } else {
+        document.getElementById("output").innerHTML =
+          "Geolocation not supported.";
+      }
+    }
+
+    function showPosition(position) {
+      document.getElementById("output").innerHTML =
+        "Latitude: " + position.coords.latitude +
+        "<br>Longitude: " + position.coords.longitude;
+    }
+
+    function showError(error) {
+      document.getElementById("output").innerHTML =
+        "Location permission denied.";
+    }
+  </script>
+</body>
+</html>
