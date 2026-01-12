@@ -1,0 +1,139 @@
+/* 1. Global Reset & Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* 2. Body & Background Setup */
+body {
+    background: url('images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    padding-left: 15%; /* Shifts box to the right from the left edge */
+    overflow: hidden;
+}
+
+/* 3. The Login Box (Black Transparent) */
+.login-box {
+    background: rgba(0, 0, 0, 0.65); 
+    padding: 45px 35px;
+    border-radius: 12px; /* Standard slightly rounded corners for the box */
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 4. Logo & Text Styling */
+.logo {
+    max-width: 170px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #ffffff;
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #cccccc;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* 5. Input Fields (Standard Edges - NOT Pill Shaped) */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px; /* Standard professional corners */
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #e74c3c;
+    box-shadow: 0 0 8px rgba(231, 76, 60, 0.3);
+}
+
+/* 6. Red Login Button (Curved/Pill Shaped) */
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    background-color: #e74c3c; 
+    color: white;
+    border: none;
+    border-radius: 50px; /* Fully curved edges */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+/* 7. Divider Styling */
+.divider {
+    margin: 30px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+.divider span {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a1a1a; 
+    padding: 0 15px;
+    color: #888;
+    font-size: 12px;
+}
+
+/* 8. Blue Registration Button (Curved/Pill Shaped) */
+.btn-register {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background-color: #3498db; 
+    color: white;
+    text-decoration: none;
+    border-radius: 50px; /* Fully curved edges */
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-register:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* 9. Mobile Responsiveness */
+@media (max-width: 768px) {
+    body {
+        justify-content: center;
+        padding-left: 0;
+    }
+}
