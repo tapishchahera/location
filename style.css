@@ -8,13 +8,17 @@
 
 /* 2. Body & Background Setup */
 body {
-    background: url('images/background.jpg') no-repeat center center fixed;
+    /* Layer 1: Dark gradient focused on corners. Layer 2: Your background image */
+    background: 
+        radial-gradient(circle, rgba(0,0,0,0) 20%, rgba(0,0,0,0.7) 100%), 
+        url('images/background.jpg') no-repeat center center fixed;
+    
     background-size: cover;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: flex-start; 
-    padding-left: 15%; /* Shifts box to the right from the left edge */
+    padding-left: 15%; 
     overflow: hidden;
 }
 
@@ -136,4 +140,5 @@ h2 {
         justify-content: center;
         padding-left: 0;
     }
+
 }
